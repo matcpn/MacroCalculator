@@ -1,0 +1,5 @@
+C:\Users\Matt\AndroidstudioProjects\MacroCalculator\app\build\intermediates\classes\debug
+C:\Users\Matt\AndroidstudioProjects\MacroCalculator\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-d7af88883f8983d994a4ce3b384d34a54c51f9a2.jar
+C:\Users\Matt\AndroidstudioProjects\MacroCalculator\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-86d95ea07f08e765e6507ad552638845ab14f5e4.jar
+C:\Users\Matt\AndroidstudioProjects\MacroCalculator\app\build\intermediates\pre-dexed\debug\classes-be7c5043f819be946135537aae3357bd6c43f2f7.jar
+C:\Users\Matt\AndroidstudioProjects\MacroCalculator\app\build\intermediates\pre-dexed\debug\classes-4be06c6b0603571cbb2fb11fdc07528e1009bd83.jar

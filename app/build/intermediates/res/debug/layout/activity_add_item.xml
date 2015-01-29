@@ -1,0 +1,117 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.macrocalculator.AddItem"
+    tools:ignore="MergeRootFrame" >
+
+    <TextView
+        android:id="@+id/SearchLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:text="Search for food" />
+
+    <EditText
+        android:id="@+id/SearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SearchLabel"
+        android:ems="10" />
+    <Button
+        android:id="@+id/SearchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SearchBar"
+        android:layout_centerHorizontal="true"
+        android:text="Search"
+        android:onClick="AddFoodItem"/>
+
+    <TextView
+        android:id="@+id/FooterLabel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:layout_below="@+id/SearchButton"
+        android:text="Or enter it manually" />
+
+    <TextView
+        android:id="@+id/NameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/FooterLabel"
+        android:text="Name" />
+    
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NameLabel"
+        android:ems="10" />
+
+    <TextView
+        android:id="@+id/ProteinValueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Name"
+        android:text="Protein Value" />
+    
+    <EditText
+        android:id="@+id/ProteinValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" 
+        android:layout_below="@+id/ProteinValueLabel"/>
+    
+    <TextView
+        android:id="@+id/CarbValueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/ProteinValue"
+        android:text="Carb Value" />
+    
+    <EditText
+        android:id="@+id/CarbValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" 
+        android:layout_below="@+id/CarbValueLabel"/>
+    
+    <TextView
+        android:id="@+id/FatValueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CarbValue"
+        android:text="Fat Value" />
+    
+    <EditText
+        android:id="@+id/FatValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number" 
+        android:layout_below="@+id/FatValueLabel"/>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/FatValue"
+        android:layout_centerHorizontal="true"
+        android:text="Add Item" 
+        android:onClick="AddFoodItem"/>
+
+</RelativeLayout>
+
+<!-- From: file:/C:/Users/Matt/AndroidstudioProjects/MacroCalculator/app/src/main/res/layout/activity_add_item.xml -->
