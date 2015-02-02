@@ -6,7 +6,7 @@ import android.os.Parcelable;
 
 public class Food implements Parcelable 
 {
-    public String name;
+    public String name, dateConsumed;
 	public double calorieCount, proteinCount, carbCount, fatCount; 
 	
 	public Food(String name, double calorieCount, double proteinCount, double carbCount, double fatCount)
@@ -17,6 +17,15 @@ public class Food implements Parcelable
 		this.carbCount = carbCount;
 		this.fatCount = fatCount;
 	}
+    public Food(String name, double calorieCount, double proteinCount, double carbCount, double fatCount, String dateConsumed)
+    {
+        this.name = name;
+        this.calorieCount = calorieCount;
+        this.proteinCount = proteinCount;
+        this.carbCount = carbCount;
+        this.fatCount = fatCount;
+        this.dateConsumed = dateConsumed;
+    }
 	public Food(String name, double proteinCount, double carbCount, double fatCount)
 	{
 		this.name = name;

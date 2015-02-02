@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:minLevel="3000" android:maxLevel="3099" android:drawable="@drawable/remaining3k" />
+    <item android:minLevel="2900" android:maxLevel="2999" android:drawable="@drawable/remaining29k" />
+    <item android:minLevel="2800" android:maxLevel="2899" android:drawable="@drawable/remaining28k" />
+    <item android:minLevel="2700" android:maxLevel="2799" android:drawable="@drawable/remaining27k" />
+    <item android:minLevel="2600" android:maxLevel="2699" android:drawable="@drawable/remaining26k" />
+    <item android:minLevel="2500" android:maxLevel="2599" android:drawable="@drawable/remaining25k" />
+    <item android:minLevel="2400" android:maxLevel="2499" android:drawable="@drawable/remaining24k" />
+    <item android:minLevel="2300" android:maxLevel="2399" android:drawable="@drawable/remaining23k" />
+    <item android:minLevel="2200" android:maxLevel="2299" android:drawable="@drawable/remaining22k" />
+    <item android:minLevel="2100" android:maxLevel="2199" android:drawable="@drawable/remaining21k" />
+    <item android:minLevel="2000" android:maxLevel="2099" android:drawable="@drawable/remaining2k" />
+    <item android:minLevel="1900" android:maxLevel="1999" android:drawable="@drawable/remaining19k" />
+    <item android:minLevel="1800" android:maxLevel="1899" android:drawable="@drawable/remaining18k" />
+    <item android:minLevel="1700" android:maxLevel="1799" android:drawable="@drawable/remaining17k" />
+    <item android:minLevel="1600" android:maxLevel="1699" android:drawable="@drawable/remaining16k" />
+    <item android:minLevel="1500" android:maxLevel="1599" android:drawable="@drawable/remaining15k" />
+    <item android:minLevel="1400" android:maxLevel="1499" android:drawable="@drawable/remaining14k" />
+    <item android:minLevel="1300" android:maxLevel="1399" android:drawable="@drawable/remaining13k" />
+    <item android:minLevel="1200" android:maxLevel="1299" android:drawable="@drawable/remaining12k" />
+    <item android:minLevel="1100" android:maxLevel="1199" android:drawable="@drawable/remaining11k" />
+    <item android:minLevel="1000" android:maxLevel="1099" android:drawable="@drawable/remaining1k" />
+    <item android:minLevel="900" android:maxLevel="999" android:drawable="@drawable/remaining900" />
+    <item android:minLevel="800" android:maxLevel="899" android:drawable="@drawable/remaining800" />
+    <item android:minLevel="700" android:maxLevel="799" android:drawable="@drawable/remaining700" />
+    <item android:minLevel="600" android:maxLevel="699" android:drawable="@drawable/remaining600" />
+    <item android:minLevel="500" android:maxLevel="599" android:drawable="@drawable/remaining500" />
+    <item android:minLevel="400" android:maxLevel="499" android:drawable="@drawable/remaining400" />
+    <item android:minLevel="300" android:maxLevel="399" android:drawable="@drawable/remaining300" />
+    <item android:minLevel="200" android:maxLevel="299" android:drawable="@drawable/remaining200" />
+    <item android:minLevel="100" android:maxLevel="199" android:drawable="@drawable/remaining100" />
+    <item android:minLevel="0" android:maxLevel="99" android:drawable="@drawable/remaining0" />
+</level-list>

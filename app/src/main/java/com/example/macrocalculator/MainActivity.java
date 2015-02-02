@@ -17,22 +17,8 @@ package com.example.macrocalculator;
 //if u hit the back button then u restore info so u call closedb but then if it hits hack it tries to use a closed db without reopening it. 
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.CharBuffer;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -45,16 +31,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 //import android.widget.Toast;
-import android.widget.Toast;
-import android.app.Activity;
-import android.database.Cursor;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-import android.app.ActionBar;
 
 
-public class MainActivity extends ActionBarActivity { 
+public class MainActivity extends ActionBarActivity {
 	public FoodList FoodMenu;
 	DBAdapter myDb;
 	
@@ -73,6 +52,8 @@ public class MainActivity extends ActionBarActivity {
 		
 		populateListView(); 
 		registerClickCallback();
+
+        startService(new Intent(this, LocalService.class));
 
    	}
 	
@@ -94,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
 	public void sendMessage(View view) // called from the buttons 
 	{
 		myDb.close();
-	    Intent intent = new Intent(this, DisplayMessageActivity.class);
+	    Intent intent = new Intent(this, ConsumedFoodActivity.class);
 		startActivity(intent);
 	}
 	
@@ -121,12 +102,14 @@ public class MainActivity extends ActionBarActivity {
 	private void registerClickCallback()  //if a item is clicked
 	{
 		ListView list = (ListView) findViewById(R.id.listViewMain);
+        final Intent i = new Intent(this, LocalService.class);
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() 
 		{
 			public void onItemClick(AdapterView<?> paret, View viewClicked, int position, long id) 
 			{ 
 				TextView textView = (TextView) viewClicked; 
 				myDb.addRowToConsumedList(ConsumedListDBHandler.CONSUMED_LIST, textView.getText().toString());
+                startService(i);
 			}
 		});
 	}

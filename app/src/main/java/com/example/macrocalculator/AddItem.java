@@ -70,6 +70,7 @@ public class AddItem extends ActionBarActivity {
 		double proteinCount;
 		double carbCount;
 		double fatCount;
+        int calorieCount;
 		
 		TextView nameValue = (TextView)findViewById(R.id.Name);
 		name = nameValue.getText().toString();
@@ -102,15 +103,21 @@ public class AddItem extends ActionBarActivity {
 		{
 			fatCount = 0;
 		}
-		
-		int calorieCount = (int)(proteinCount*4 + carbCount*4 + fatCount*9);
-		
+        try
+        {
+            TextView calorieValue = (TextView)findViewById(R.id.CaloriesValue);
+            calorieCount = Integer.parseInt(calorieValue.getText().toString());
+        }
+        catch(Exception e) {
+            calorieCount = (int) (proteinCount * 4 + carbCount * 4 + fatCount * 9);
+        }
+
 		DBAdapter myDb;
 		myDb = new DBAdapter(this);
 		myDb.open();
 		myDb.addRowToMenu(DBAdapter.FOOD_MENU, name, calorieCount, (int)proteinCount, (int)carbCount, (int)fatCount);
 		myDb.close();
-		
+
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
 	}

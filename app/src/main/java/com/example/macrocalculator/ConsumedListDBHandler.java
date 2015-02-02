@@ -82,6 +82,13 @@ public class ConsumedListDBHandler {
 			Cursor c = db.rawQuery(sql, null);
 			return c;
 		}
+
+        public Cursor getCaloriesConsumed()
+        {
+            String sql = "sum calorie_count from foodMenu where foodMenu.name = consumedList.name";
+            Cursor c = db.rawQuery(sql, null);
+            return c;
+        }
 		
 		private static class DatabaseHelper extends SQLiteOpenHelper
 		{

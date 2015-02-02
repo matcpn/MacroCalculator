@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class DBAdapter {
@@ -27,6 +29,7 @@ public class DBAdapter {
 	public static final String KEY_PROTEIN_COUNT = "protein_count";
 	public static final String KEY_CARB_COUNT = "carb_count";
 	public static final String KEY_FAT_COUNT = "fat_count";
+    public static final String KEY_DATE_CONSUMED = "date_consumed";
 	
 	// TODO: Setup your field numbers here (0 = KEY_ROWID, 1=...)
 	public static final int COL_NAME = 1;
@@ -34,11 +37,11 @@ public class DBAdapter {
 	public static final int COL_PROTEIN_COUNT = 3;
 	public static final int COL_CARB_COUNT = 4;
 	public static final int COL_FAT_COUNT = 5;
-
+    public static final int COL_DATE_CONSUMED = 6;
 	
-	public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_CALORIE_COUNT, KEY_PROTEIN_COUNT, KEY_CARB_COUNT, KEY_FAT_COUNT};
+	public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_CALORIE_COUNT, KEY_PROTEIN_COUNT, KEY_CARB_COUNT, KEY_FAT_COUNT, KEY_DATE_CONSUMED};
 	
-	// DB info: it's name, and the table we are using (just one).
+	// DB info: it's name, and the tables we are using.
 	public static final String DATABASE_NAME = "a"; //FOR WHATEVER REASON THE DATABASE NAME NEEDED TO CHANGE
 	public static final String FOOD_MENU = "foodMenu";
 	public static final String CONSUMED_LIST = "consumedList";
@@ -64,7 +67,8 @@ public class DBAdapter {
 			"create table " + CONSUMED_LIST 
 			+ " (" + KEY_ROWID + " integer primary key autoincrement, "
 
-			+ KEY_NAME + " text not null"
+			+ KEY_NAME + " text not null, "
+            + KEY_DATE_CONSUMED + " text not null" // date time formatted as "YYYY-MM-DD"
 			+ ");";
 	
 	private final Context context;
@@ -104,8 +108,12 @@ public class DBAdapter {
 		
 	public long addRowToConsumedList(String DATABASE_TABLE_NAME, String name) 
 	{
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+        Log.d("date adding: ", ft.format(date));
 		ContentValues initialValues = new ContentValues();
 		initialValues.put(KEY_NAME, name);
+        initialValues.put(KEY_DATE_CONSUMED, ft.format(date));
 
 		return db.insert(DATABASE_TABLE_NAME, null, initialValues);
 	}
@@ -116,7 +124,13 @@ public class DBAdapter {
 	}
 	public Cursor GetFoodInfo()
 	{
-		String sql = "select consumedList._id, consumedList.name, calorie_count, protein_count, carb_count, fat_count from foodMenu join consumedList on foodMenu.name = consumedList.name;";
+        Date now = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
+		String sql = "select * " +
+                "from foodMenu f, consumedList c " +
+                "where f.name = c.name " +
+                        "and c.date_consumed = \'" + ft.format(now) + "\';";
+        Log.d("query: ", sql);
 		Cursor c = db.rawQuery(sql, null);
 		return c;
 	}
@@ -130,7 +144,7 @@ public class DBAdapter {
 	public FoodList loadConsumedList()
 	{
 		Cursor cursor = GetFoodInfo();
-    	return cursorToFoodList(cursor);
+    	return cursorToConsumedList(cursor);
 	}
 	
 	public FoodList cursorToFoodList(Cursor cursor)
@@ -146,13 +160,35 @@ public class DBAdapter {
 				int carbCount = cursor.getInt(DBAdapter.COL_CARB_COUNT);
 				int fatCount = cursor.getInt(DBAdapter.COL_FAT_COUNT);
 
-				Food newFood = new Food(name, calorieCount, proteinCount, carbCount, fatCount);
+                Food newFood = new Food(name, calorieCount, proteinCount, carbCount, fatCount);
 				foodList.addFood(newFood);
 			} 
 			while(cursor.moveToNext());
 		}
 		return foodList;
 	}
+
+    public FoodList cursorToConsumedList(Cursor cursor)
+    {
+        FoodList foodList = new FoodList();
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                String name = cursor.getString(DBAdapter.COL_NAME);
+                int calorieCount = cursor.getInt(DBAdapter.COL_CALORIE_COUNT);
+                int proteinCount = cursor.getInt(DBAdapter.COL_PROTEIN_COUNT);
+                int carbCount = cursor.getInt(DBAdapter.COL_CARB_COUNT);
+                int fatCount = cursor.getInt(DBAdapter.COL_FAT_COUNT);
+                String dateConsumed = cursor.getString(DBAdapter.COL_DATE_CONSUMED);
+
+                Food newFood = new Food(name, calorieCount, proteinCount, carbCount, fatCount, dateConsumed);
+                foodList.addFood(newFood);
+            }
+            while(cursor.moveToNext());
+        }
+        return foodList;
+    }
 	
 	
 	
@@ -176,9 +212,13 @@ public class DBAdapter {
 		}
 		c.close();
 	}
-	
 
-	private static class DatabaseHelper extends SQLiteOpenHelper
+    public void removeRowFromConsumedList(String consumedList, String s) {
+
+    }
+
+
+    private static class DatabaseHelper extends SQLiteOpenHelper
 	{
 		DatabaseHelper(Context context) {
 			super(context, DATABASE_NAME, null, DATABASE_VERSION);

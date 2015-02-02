@@ -56,13 +56,29 @@
         android:ems="10" />
 
     <TextView
-        android:id="@+id/ProteinValueLabel"
+        android:id="@+id/CaloriesValueLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/Name"
+        android:text="Calories" />
+
+    <EditText
+        android:id="@+id/CaloriesValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:layout_below="@+id/CaloriesValueLabel"/>
+
+    <TextView
+        android:id="@+id/ProteinValueLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CaloriesValue"
         android:text="Protein Value" />
-    
+
     <EditText
         android:id="@+id/ProteinValue"
         android:layout_width="match_parent"
