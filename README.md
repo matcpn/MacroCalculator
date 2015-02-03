@@ -14,3 +14,5 @@ bug fixes:
 <br>1. make a better nav bar
 <br>2. get rid of that dumb "are you sure" screen
 <br>3. fix the images for the calorie counter so that they're centered
+<br>4. fix the icon when you look in notification bar to show correct number
+<br>5. fix it so that licking the notification launches the app
