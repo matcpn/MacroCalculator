@@ -7,6 +7,7 @@ major features I'd like to add before release:
 <br>5. rewrite a lot of code
 <br>6. A simplistic way to log exercise, displayed in a user friendly way (e.g. somthing like a "get more calories" button, lets you log exercise and your calories remaining on the day go back up)
 <br>7. Get the government food database working so that you can quickly add foods to the food menu
+<br>8. Decouple the ConsumedList database from the food menu database so that I can clear my food menu without losing my foods in my consumed list
 
 minor features:
 <br>1. remove items from the food menu and consumed food list
