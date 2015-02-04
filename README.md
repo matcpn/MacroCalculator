@@ -26,10 +26,12 @@ bug fixes:
 <br>7, fix the calorie counter number to round rather than truncate
 
 crazy ideas that I dont even know if they're possible:
-<br> 1.S Health/fitbit/pedometer integration??
+<br> 1.S Health/fitbit/pedometer integration?? Maybe even roll my own pedometer??
 <br> 2. a user driven food database similar to mfp??
+<br> 3. macro/calorie analyzer and food suggester
+<br> 4. graphs and data and shit for past days
 
 
 new ui design:
-http://i.imgur.com/bPgotA4.png
-http://i.imgur.com/zbZmoHf.png
+<br>http://i.imgur.com/bPgotA4.png
+<br>http://i.imgur.com/zbZmoHf.png
