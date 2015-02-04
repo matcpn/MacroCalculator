@@ -21,7 +21,8 @@ bug fixes:
 <br>3. fix the images for the calorie counter so that they're centered
 <br>4. fix the icon when you look in notification menu to show correct number
 <br>5. fix it so that clicking the notification launches the app
-<br>6/ got a weird bug somehow when adding item to the consumed food menu -  might be fixed by #8 in major features
+<br>6. got a weird bug somehow when adding item to the consumed food menu -  might be fixed by #8 in major features
+<br>7, fix the calorie counter number to round rather than truncate
 
 crazy ideas that I dont even know if they're possible:
 <br> 1.S Health/fitbit/pedometer integration??
