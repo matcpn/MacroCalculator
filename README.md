@@ -9,6 +9,7 @@ major features I'd like to add before release:
 <br>7. Get the government food database working so that you can quickly add foods to the food menu
 <br>8. Decouple the ConsumedList database from the food menu database so that I can clear my food menu without losing my foods in my consumed list
 <br>9. Sort food list by most recently used
+<br>10. periodically ping you to update weight (1ce a week?)
 
 minor features:
 <br>1. ability to remove items from the food menu and consumed food list
