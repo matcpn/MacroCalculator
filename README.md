@@ -10,15 +10,16 @@ major features I'd like to add before release:
 <br>8. Decouple the ConsumedList database from the food menu database so that I can clear my food menu without losing my foods in my consumed list
 
 minor features:
-<br>1. remove items from the food menu and consumed food list
-<br>2. add more calorie counter images
+<br>1. ability to remove items from the food menu and consumed food list
+<br>2. add more calorie counter images - ie make it so you can go past 3k calories remaining
+<br>3. add a confirm box to delete all consumed and delete single consumed
 
 bug fixes:
 <br>1. make a better nav bar
 <br>2. get rid of that dumb "are you sure" screen
 <br>3. fix the images for the calorie counter so that they're centered
-<br>4. fix the icon when you look in notification bar to show correct number
-<br>5. fix it so that licking the notification launches the app
+<br>4. fix the icon when you look in notification menu to show correct number
+<br>5. fix it so that clicking the notification launches the app
 
 crazy ideas that I dont even know if they're possible:
 <br> 1.S Health/fitbit/pedometer integration??
