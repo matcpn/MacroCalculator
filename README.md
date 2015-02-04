@@ -8,6 +8,7 @@ major features I'd like to add before release:
 <br>6. A simplistic way to log exercise, displayed in a user friendly way (e.g. somthing like a "get more calories" button, lets you log exercise and your calories remaining on the day go back up)
 <br>7. Get the government food database working so that you can quickly add foods to the food menu
 <br>8. Decouple the ConsumedList database from the food menu database so that I can clear my food menu without losing my foods in my consumed list
+<br>9. Sort food list by most recently used
 
 minor features:
 <br>1. ability to remove items from the food menu and consumed food list
@@ -20,7 +21,13 @@ bug fixes:
 <br>3. fix the images for the calorie counter so that they're centered
 <br>4. fix the icon when you look in notification menu to show correct number
 <br>5. fix it so that clicking the notification launches the app
+<br>6/ got a weird bug somehow when adding item to the consumed food menu -  might be fixed by #8 in major features
 
 crazy ideas that I dont even know if they're possible:
 <br> 1.S Health/fitbit/pedometer integration??
 <br> 2. a user driven food database similar to mfp??
+
+
+new ui design:
+http://i.imgur.com/bPgotA4.png
+http://i.imgur.com/zbZmoHf.png
