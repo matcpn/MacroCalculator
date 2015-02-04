@@ -14,16 +14,17 @@ major features I'd like to add before release:
 minor features:
 <br>1. ability to remove items from the food menu and consumed food list
 <br>2. add more calorie counter images - ie make it so you can go past 3k calories remaining
-<br>3. add a confirm box to delete all consumed and delete single consumed
+~~<br>3. add a confirm box to delete all consumed and delete single consumed~~
 
 bug fixes:
 <br>1. make a better nav bar
-<br>2. get rid of that dumb "are you sure" screen
+~~<br>2. get rid of that dumb "are you sure" screen~~
 <br>3. fix the images for the calorie counter so that they're centered
 <br>4. fix the icon when you look in notification menu to show correct number
 <br>5. fix it so that clicking the notification launches the app
 <br>6. got a weird bug somehow when adding item to the consumed food menu -  might be fixed by #8 in major features
 <br>7, fix the calorie counter number to round rather than truncate
+<br>8. fix the clear list consumed foods option to only clea rthe list for today rather than all of history
 
 crazy ideas that I dont even know if they're possible:
 <br> 1.S Health/fitbit/pedometer integration?? Maybe even roll my own pedometer??
