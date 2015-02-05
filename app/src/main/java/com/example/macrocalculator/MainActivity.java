@@ -17,6 +17,8 @@ package com.example.macrocalculator;
 //if u hit the back button then u restore info so u call closedb but then if it hits hack it tries to use a closed db without reopening it. 
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
@@ -28,6 +30,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 //import android.widget.Toast;
@@ -40,37 +43,75 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 		if (savedInstanceState == null) 
 		{
 			getSupportFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
 		}
 
 
-		openDB();
-		FoodMenu = myDb.loadFoodMenu();
-		
-		populateListView(); 
-		registerClickCallback();
-
-        startService(new Intent(this, LocalService.class));
+		build();
 
    	}
-	
+	private void build() {
+        setContentView(R.layout.activity_main);
+        openDB();
+        FoodMenu = myDb.loadFoodMenu();
+        setupFoodSearchButton();
+        populateListView();
+        registerClickCallback();
+
+        startService(new Intent(this, StatusBarNotification.class));
+    }
 	private void openDB() 
 	{
 		myDb = new DBAdapter(this);
 		myDb.open();
 	}
-	
-	
-	public void are_you_sure(View view) 
-	{
-		myDb.close();
-	    Intent intent = new Intent(this, Are_you_sure.class);
-		startActivity(intent);
-	}
-	
+
+    private void setupFoodSearchButton() {
+        myDb.close();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        Button SearchButton = (Button) findViewById(R.id.delete_menu);
+        final Intent i = new Intent(this, StatusBarNotification.class);
+        final DBAdapter db = myDb;
+
+        SearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder.setTitle("Add Item");
+                builder.setMessage("Would you like to permanently delete the food menu?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing but close the dialog
+                        myDb.open();
+                        db.deleteAll(DBAdapter.FOOD_MENU);
+                        myDb.close();
+                        dialog.dismiss();
+                        startService(i);
+                        build();
+                    }
+
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+
+        });
+    }
 	
 	public void sendMessage(View view) // called from the buttons 
 	{
@@ -101,15 +142,48 @@ public class MainActivity extends ActionBarActivity {
 	
 	private void registerClickCallback()  //if a item is clicked
 	{
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		ListView list = (ListView) findViewById(R.id.listViewMain);
-        final Intent i = new Intent(this, LocalService.class);
+        final Intent i = new Intent(this, StatusBarNotification.class);
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() 
 		{
 			public void onItemClick(AdapterView<?> paret, View viewClicked, int position, long id) 
-			{ 
-				TextView textView = (TextView) viewClicked; 
-				myDb.addRowToConsumedList(ConsumedListDBHandler.CONSUMED_LIST, textView.getText().toString());
-                startService(i);
+			{
+                final TextView textView = (TextView) viewClicked;
+
+
+                builder.setTitle("Add Item");
+                builder.setMessage("Would you like to add the item to the consumed list or remove it from the menu?");
+
+                builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // add to the db
+                        myDb.open();
+                        myDb.addRowToConsumedList(ConsumedListDBHandler.CONSUMED_LIST, textView.getText().toString());
+                        myDb.close();
+                        dialog.dismiss();
+                        startService(i);
+                    }
+
+                });
+
+                builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing (for now)
+                        myDb.open();
+                        myDb.removeRowFromFoodList(textView.getText().toString());
+                        myDb.close();
+                        build();
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
 			}
 		});
 	}

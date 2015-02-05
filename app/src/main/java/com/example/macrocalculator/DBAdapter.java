@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -213,8 +214,32 @@ public class DBAdapter {
 		c.close();
 	}
 
-    public void removeRowFromConsumedList(String consumedList, String s) {
+    public void removeRowFromConsumedList(String name) {
+        String sql = "select c._id"
+                + " from consumedList c " +
+                "where c.name = '" + name + "';";
+        Log.d("query", sql);
+        Cursor c = db.rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            int id = c.getInt(COL_ROWID);
+            sql = "_id = " + id;
+            Log.d("query", sql);
+            Log.d("rows deleted", String.valueOf(db.delete(CONSUMED_LIST, sql, null)));
+        }
+    }
 
+    public void removeRowFromFoodList(String name) {
+        String sql = "select f._id"
+                + " from foodMenu f " +
+                "where f.name = '" + name + "';";
+        Log.d("query", sql);
+        Cursor c = db.rawQuery(sql, null);
+        if(c.moveToFirst()) {
+            int id = c.getInt(COL_ROWID);
+            sql = "_id = " + id;
+            Log.d("query", sql);
+            Log.d("rows deleted", String.valueOf(db.delete(CONSUMED_LIST, sql, null)));
+        }
     }
 
 

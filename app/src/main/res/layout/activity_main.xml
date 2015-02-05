@@ -9,14 +9,15 @@
     <ListView
         android:id="@+id/listViewMain"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer">
     </ListView>
 
     <LinearLayout android:id="@+id/footer" android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:orientation="horizontal"
         android:layout_alignParentBottom="true" style="@android:style/ButtonBar">
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/delete_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

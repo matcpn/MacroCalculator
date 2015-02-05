@@ -47,7 +47,7 @@ MERGED from com.android.support:support-v4:21.0.3:16:5
 		ADDED from AndroidManifest.xml:15:9
 	android:theme
 		ADDED from AndroidManifest.xml:17:9
-service#com.example.macrocalculator.LocalService
+service#com.example.macrocalculator.StatusBarNotification
 ADDED from AndroidManifest.xml:18:9
 	android:name
 		ADDED from AndroidManifest.xml:18:18
@@ -89,9 +89,3 @@ ADDED from AndroidManifest.xml:36:9
 		ADDED from AndroidManifest.xml:39:13
 	android:name
 		ADDED from AndroidManifest.xml:37:13
-activity#com.example.macrocalculator.Are_you_sure
-ADDED from AndroidManifest.xml:44:9
-	android:label
-		ADDED from AndroidManifest.xml:46:13
-	android:name
-		ADDED from AndroidManifest.xml:45:13

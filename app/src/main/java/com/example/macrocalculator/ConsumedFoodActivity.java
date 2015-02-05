@@ -1,17 +1,13 @@
 package com.example.macrocalculator;
 
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import android.content.Context;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment; // imported the wrong shit ... happens too damn much
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 //import android.widget.Toast;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ConsumedFoodActivity extends ActionBarActivity
 {
@@ -31,15 +26,18 @@ public class ConsumedFoodActivity extends ActionBarActivity
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_message); 
-        
-        
+        build();
+    }
+
+    private void build() {
+        setContentView(R.layout.activity_consumed_food);
+
         openDB();
         consumedFoodList = myDb.loadConsumedList();
         this.populateListView();
+        registerClickCallback();
         setTextField();
     }
-    
 	private void openDB() 
 	{
 		myDb = new DBAdapter(this);
@@ -62,23 +60,77 @@ public class ConsumedFoodActivity extends ActionBarActivity
     }
 	public void clearList(View view)
 	{
-		myDb.deleteAll(DBAdapter.CONSUMED_LIST);
-		consumedFoodList = myDb.loadConsumedList();
-        this.populateListView();
-        setTextField();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final Intent i = new Intent(this, StatusBarNotification.class);
+        builder.setTitle("Clear List");
+        builder.setMessage("Would you like to clear the consumed foods list?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                // add to the db
+                //TODO
+                //Make a new method that only deletes food from today and not clears the entire table
+                Log.d("clearing", "clearing consumedFoods list");
+                myDb.deleteAll(DBAdapter.CONSUMED_LIST);
+                consumedFoodList = myDb.loadConsumedList();
+                startService(i);
+                build();
+            }
+
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do nothing (for now)
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
 	}
 
     private void registerClickCallback()  //if a item is clicked
     {
-        ListView list = (ListView) findViewById(R.id.listViewMain);
-        final Intent i = new Intent(this, LocalService.class);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        ListView list = (ListView) findViewById(R.id.listView1);
+        final Intent i = new Intent(this, StatusBarNotification.class);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> paret, View viewClicked, int position, long id)
             {
-                TextView textView = (TextView) viewClicked;
-                myDb.removeRowFromConsumedList(ConsumedListDBHandler.CONSUMED_LIST, textView.getText().toString());
-                startService(i);
+                final TextView textView = (TextView) viewClicked;
+                builder.setTitle("Remove Item");
+                builder.setMessage("Would you like to remove the item from the consumed foods?");
+
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // add to the db
+                        Log.d("removing", String.valueOf(textView.getText()));
+                        myDb.removeRowFromConsumedList(textView.getText().toString());
+                        startService(i);
+                        build();
+                    }
+
+                });
+
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing (for now)
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
     }
