@@ -23,7 +23,7 @@ bug fixes:
 <br>4. fix the icon when you look in notification menu to show correct number
 <br>5. fix it so that clicking the notification launches the app
 <br>6. got a weird bug somehow when adding item to the consumed food menu -  might be fixed by #8 in major features
-<br>7, fix the calorie counter number to round rather than truncate
+~~<br>7, fix the calorie counter number to round rather than truncate~~
 <br>8. fix the clear list consumed foods option to only clea rthe list for today rather than all of history
 
 crazy ideas that I dont even know if they're possible:
