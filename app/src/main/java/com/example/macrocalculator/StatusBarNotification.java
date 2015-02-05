@@ -15,6 +15,7 @@ public class StatusBarNotification extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        int requestID = (int) System.currentTimeMillis();
         DBAdapter myDb;
         myDb = new DBAdapter(this);
         myDb.open();
@@ -24,14 +25,16 @@ public class StatusBarNotification extends Service {
         int remainingCalories = totalCaloriesNeeded - (int)list.getCalorieCount();
         Log.d("cals", String.valueOf(remainingCalories));
 
+        Intent i = new Intent(this, MainActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,requestID, i, 0);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.remaining_calorie_counter, remainingCalories)
+                .setContentIntent(contentIntent)
                 .setContentTitle("Remaining Calories")
                 .setContentText("Tap to log food!");
 
-        final Intent notificationIntent = new Intent(this, StatusBarNotification.class);
-        final PendingIntent pi = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-        builder.setContentIntent(pi);
         final Notification note = builder.build();
 
         startForeground(SERVICE_ID, note);
