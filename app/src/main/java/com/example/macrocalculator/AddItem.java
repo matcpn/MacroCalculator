@@ -1,11 +1,9 @@
 package com.example.macrocalculator;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,22 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.os.Build;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.w3c.dom.NodeList;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.*;
 
 public class AddItem extends ActionBarActivity {
 
-	
-	protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_add_item); // set the content view to activity_add_item, not fragement_add_item
@@ -49,16 +35,8 @@ public class AddItem extends ActionBarActivity {
             public void onClick(View v) {
                 TextView searchValView = (TextView)findViewById(R.id.SearchBar);
                 String searchVal = searchValView.getText().toString();
-                try {
-                    String urlString = "http://api.data.gov/usda/ndb/search/?format=xml&q=" + URLEncoder.encode(searchVal, "UTF-8") + "&api_key=Y6uH9DT59rzs5C2iBmGffchYkmTJL71CJcaZM8FU";
-                    NodeList foods = new FoodDatabaseLookup().execute(urlString).get();
-                    for (int i = 0; i < foods.getLength(); i++) {
-                        Log.d("element" + i, foods.item(i).getTextContent());
-                    }
-                }
-                catch (Exception e) {
-                    return;
-                }
+
+                new FoodDatabase().search(searchVal);
             }
         });
 
