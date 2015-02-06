@@ -34,6 +34,7 @@
         android:gravity="center"
         android:textSize="25sp"
         android:layout_below="@id/SearchBar"
+        android:textColor="@color/black"
         android:text="@string/manual_entry"
         android:paddingTop="72dp" />
 
