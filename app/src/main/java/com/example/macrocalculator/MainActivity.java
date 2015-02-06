@@ -1,22 +1,5 @@
 package com.example.macrocalculator;
 
-// if u erase the app, u lose the text file and it only loads what it has in the oncreate method ... with options.add ...
-
-
-// solid video: http://www.youtube.com/watch?v=gFHhuRY-OxA
-// plenty of solid youtube content for andorid.
-
-
-// we are so retarded, we were trying to parse a sting by spaces and the name of the string had spaces in it...options.add(new Food("Protein Shake", 30f, 0f, 0f));
-//protein shake has spaces u idiot.
-
-
-//want to use better data storage/sort methods
-//
-//werid problem happens with the back button 
-//if u hit the back button then u restore info so u call closedb but then if it hits hack it tries to use a closed db without reopening it. 
-
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
@@ -33,22 +16,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-//import android.widget.Toast;
-
 
 public class MainActivity extends ActionBarActivity {
-	public FoodList FoodMenu;
+	public FoodList foodMenu;
 	DBAdapter myDb;
 	
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_main);
 		if (savedInstanceState == null) 
 		{
 			getSupportFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
 		}
-
 
 		build();
 
@@ -56,8 +35,8 @@ public class MainActivity extends ActionBarActivity {
 	private void build() {
         setContentView(R.layout.activity_main);
         openDB();
-        FoodMenu = myDb.loadFoodMenu();
-        setupFoodSearchButton();
+        foodMenu = myDb.loadFoodMenu();
+        setupFoodDeleteButton();
         populateListView();
         registerClickCallback();
 
@@ -69,7 +48,7 @@ public class MainActivity extends ActionBarActivity {
 		myDb.open();
 	}
 
-    private void setupFoodSearchButton() {
+    private void setupFoodDeleteButton() {
         myDb.close();
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         Button SearchButton = (Button) findViewById(R.id.delete_menu);
@@ -86,7 +65,7 @@ public class MainActivity extends ActionBarActivity {
 
                     public void onClick(DialogInterface dialog, int which) {
 
-                        // Do nothing but close the dialog
+                        // Delete everything in the database
                         myDb.open();
                         db.deleteAll(DBAdapter.FOOD_MENU);
                         myDb.close();
@@ -132,15 +111,15 @@ public class MainActivity extends ActionBarActivity {
 	}
 	
 	
-	public void populateListView() // has automatic scrolling ... PRAISE JESUS
+	public void populateListView()
     {
-    	String[] myItems = this.FoodMenu.getFoodNames();
+    	String[] myItems = this.foodMenu.getFoodNames();
     	ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.da_item, myItems); // luckily if myItems is empty it does not bust
     	ListView list = (ListView) findViewById(R.id.listViewMain);
     	list.setAdapter(adapter);
     }
 	
-	private void registerClickCallback()  //if a item is clicked
+	private void registerClickCallback()  //if a TextView within the ListView is clicked
 	{
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		ListView list = (ListView) findViewById(R.id.listViewMain);
@@ -158,10 +137,17 @@ public class MainActivity extends ActionBarActivity {
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-
                         // add to the db
+                        //foodMenu already has all the foods in it
+                        int indexOfFoodToConsume = foodMenu.getFoodList().indexOf(new Food(textView.getText().toString()));
+                        Food foodToConsume = foodMenu.getFoodList().get(indexOfFoodToConsume);
                         myDb.open();
-                        myDb.addRowToConsumedList(ConsumedListDBHandler.CONSUMED_LIST, textView.getText().toString());
+                        myDb.addRowToConsumedList(ConsumedListDBHandler.CONSUMED_LIST,
+                                foodToConsume.getName(),
+                                foodToConsume.getCalorieCount(),
+                                foodToConsume.getProteinCount(),
+                                foodToConsume.getCarbCount(),
+                                foodToConsume.getFatCount());
                         myDb.close();
                         dialog.dismiss();
                         startService(i);
@@ -173,7 +159,7 @@ public class MainActivity extends ActionBarActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing (for now)
+                        // remove the row from the food list
                         myDb.open();
                         myDb.removeRowFromFoodList(textView.getText().toString());
                         myDb.close();

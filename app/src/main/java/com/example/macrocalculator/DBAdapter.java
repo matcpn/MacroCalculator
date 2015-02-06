@@ -48,7 +48,7 @@ public class DBAdapter {
 	public static final String CONSUMED_LIST = "consumedList";
 	
 	// Track DB version if a new version of your app changes the format.
-	public static final int DATABASE_VERSION = 2;	
+	public static final int DATABASE_VERSION = 3;
 				
 	private static final String SQL_CREATE_FOOD_MENU = 
 			"create table " + FOOD_MENU 
@@ -69,6 +69,10 @@ public class DBAdapter {
 			+ " (" + KEY_ROWID + " integer primary key autoincrement, "
 
 			+ KEY_NAME + " text not null, "
+            + KEY_CALORIE_COUNT + " integer not null, "
+            + KEY_PROTEIN_COUNT + " integer not null, "
+            + KEY_CARB_COUNT + " integer not null, "
+            + KEY_FAT_COUNT + " integer not null, "
             + KEY_DATE_CONSUMED + " text not null" // date time formatted as "YYYY-MM-DD"
 			+ ");";
 	
@@ -107,13 +111,17 @@ public class DBAdapter {
 		return db.insert(DATABASE_TABLE_NAME, null, initialValues);
 	}
 		
-	public long addRowToConsumedList(String DATABASE_TABLE_NAME, String name) 
+	public long addRowToConsumedList(String DATABASE_TABLE_NAME, String name, double calorieCount, double proteinCount, double carbCount, double fatCount)
 	{
         Date date = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         Log.d("date adding: ", ft.format(date));
 		ContentValues initialValues = new ContentValues();
 		initialValues.put(KEY_NAME, name);
+        initialValues.put(KEY_CALORIE_COUNT, calorieCount);
+        initialValues.put(KEY_PROTEIN_COUNT, proteinCount);
+        initialValues.put(KEY_CARB_COUNT, carbCount);
+        initialValues.put(KEY_FAT_COUNT, fatCount);
         initialValues.put(KEY_DATE_CONSUMED, ft.format(date));
 
 		return db.insert(DATABASE_TABLE_NAME, null, initialValues);
@@ -128,9 +136,8 @@ public class DBAdapter {
         Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 		String sql = "select * " +
-                "from foodMenu f, consumedList c " +
-                "where f.name = c.name " +
-                        "and c.date_consumed = \'" + ft.format(now) + "\';";
+                "from consumedList c " +
+                "where c.date_consumed = \'" + ft.format(now) + "\';";
         Log.d("query: ", sql);
 		Cursor c = db.rawQuery(sql, null);
 		return c;
@@ -238,7 +245,7 @@ public class DBAdapter {
             int id = c.getInt(COL_ROWID);
             sql = "_id = " + id;
             Log.d("query", sql);
-            Log.d("rows deleted", String.valueOf(db.delete(CONSUMED_LIST, sql, null)));
+            Log.d("rows deleted", String.valueOf(db.delete(FOOD_MENU, sql, null)));
         }
     }
 

@@ -74,8 +74,7 @@ public class AddItem extends ActionBarActivity {
 		
 		TextView nameValue = (TextView)findViewById(R.id.Name);
 		name = nameValue.getText().toString();
-		
-		// if any of these textboxes contain nothing then it fails. use try catch.
+
 		try
 		{
 			TextView proteinValue = (TextView)findViewById(R.id.ProteinValue);

@@ -1,16 +1,11 @@
 package com.example.macrocalculator;
 
-
-
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-// so we changed the basis of this class from linked list to array list and literally nothing had to change besides that
-// PRAISE INTERFACES AND COLLECTIONS
 public class FoodList 
 {
-	ArrayList<Food> foodList; 
+	private ArrayList<Food> foodList;
 	public FoodList()
 	{
 		foodList = new ArrayList<Food>();
@@ -20,7 +15,10 @@ public class FoodList
 	{
 		this.foodList.add(newFood);
 	}
-	
+
+    public ArrayList<Food> getFoodList() {
+        return foodList;
+    }
 	
 	public void addFood(String name, double proteinCount, double carbCount, double fatCount)
 	{
@@ -89,8 +87,7 @@ public class FoodList
 	{
 		Iterator<Food> itr = this.foodList.iterator();
 		while(itr.hasNext())
-		{// always remember to use equals not == for objects and override their equals function if need be, this especially true for stirngs
-			// string == string compares the refereces to the strings ... like the pointers and types.
+		{
 			Food temp = itr.next();
 			if(name.equals(temp.name))
 			{
