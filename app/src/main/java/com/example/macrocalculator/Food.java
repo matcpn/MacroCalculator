@@ -8,7 +8,11 @@ public class Food implements Parcelable
 {
     public String name, dateConsumed;
 	public double calorieCount, proteinCount, carbCount, fatCount; 
-	
+
+    public Food(String name) {
+        //This constructor is used to name a food with only a name since the equals method only compares names (for now)
+        this.name = name;
+    }
 	public Food(String name, double calorieCount, double proteinCount, double carbCount, double fatCount)
 	{
 		this.name = name;
@@ -43,24 +47,6 @@ public class Food implements Parcelable
 		this.fatCount = in.readDouble();
     }
 
-	public Food(String food)
-	{
-		food = food.trim();
-		
-		int index0 = 0;
-		int index1 = food.indexOf(",", 0);
-		int index2 = food.indexOf(",", index1+1);
-		int index3 = food.indexOf(",", index2+1);
-		int index4 = food.indexOf(",", index3+1);
-		
-		
-		this.name = food.substring(index0, index1);
-		this.calorieCount = Double.parseDouble(food.substring(index1+1, index2));
-		this.proteinCount = Double.parseDouble(food.substring(index2+1, index3));
-		this.carbCount = Double.parseDouble(food.substring(index3+1, index4));
-		this.fatCount = Double.parseDouble(food.substring(index4+1, food.length()));
-	}
-	
     public int describeContents() {
         return 0;
     }
@@ -95,7 +81,7 @@ public class Food implements Parcelable
     public void setName(String name) {
         this.name = name;
     }
-	/////////////////////////////////////////////////////////////////////////
+
     public double getCalorieCount() {
         return calorieCount;
     }
@@ -103,7 +89,7 @@ public class Food implements Parcelable
     public void setCalorieCount(double calorieCount) {
         this.calorieCount = calorieCount;
     }
-	/////////////////////////////////////////////////////////////////////////
+
     public double getProteinCount() {
         return proteinCount;
     }
@@ -111,7 +97,7 @@ public class Food implements Parcelable
     public void setProteinCount(double proteinCount) {
         this.proteinCount = proteinCount;
     }
-	/////////////////////////////////////////////////////////////////////////
+
 	public double getCarbCount() {
         return carbCount;
     }
@@ -119,7 +105,7 @@ public class Food implements Parcelable
     public void setCarbCount(double carbCount) {
         this.carbCount = carbCount;
     }
-	/////////////////////////////////////////////////////////////////////////
+
 	public double getFatCount() {
         return fatCount;
     }
@@ -127,10 +113,10 @@ public class Food implements Parcelable
     public void setFatCount(double fatCount) {
         this.fatCount = fatCount;
     }
-	/////////////////////////////////////////////////////////////////////////
+
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Food) { // thats pretty cool
+        if(obj instanceof Food) {
             Food toCompare = (Food) obj;
             return (this.name.equalsIgnoreCase(toCompare.getName()));
         }
@@ -145,7 +131,7 @@ public class Food implements Parcelable
     
     public String toString()
     {
-    	return this.name + "," + this.calorieCount + "," + this.proteinCount + "," + this.carbCount + "," + this.fatCount + "\n";
+    	return this.name + ", " + this.calorieCount + ", " + this.proteinCount + ", " + this.carbCount + ", " + this.fatCount + "\n";
     }
 
 }

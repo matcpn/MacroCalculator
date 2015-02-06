@@ -53,7 +53,6 @@ public class ConsumedFoodActivity extends ActionBarActivity
     
     public void setTextField()
     {
-    	//text.setText(""); // clear textbox, completely unneccesary because we are setting it, not appending.
     	text = (TextView)findViewById(R.id.textView1);
     	String content = "Calories: " + this.consumedFoodList.getCalorieCount() + " Protein: " + this.consumedFoodList.getProteinCount() + " Carbs: " + this.consumedFoodList.getCarbCount() + " Fats: " + this.consumedFoodList.getFatCount();
     	text.setText(content);
@@ -69,7 +68,7 @@ public class ConsumedFoodActivity extends ActionBarActivity
 
             public void onClick(DialogInterface dialog, int which) {
 
-                // add to the db
+                // clear the table in the db
                 //TODO
                 //Make a new method that only deletes food from today and not clears the entire table
                 Log.d("clearing", "clearing consumedFoods list");
@@ -85,7 +84,7 @@ public class ConsumedFoodActivity extends ActionBarActivity
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Do nothing (for now)
+                // Do nothing
                 dialog.dismiss();
             }
         });
@@ -111,7 +110,7 @@ public class ConsumedFoodActivity extends ActionBarActivity
 
                     public void onClick(DialogInterface dialog, int which) {
 
-                        // add to the db
+                        // remove the item from db
                         Log.d("removing", String.valueOf(textView.getText()));
                         myDb.removeRowFromConsumedList(textView.getText().toString());
                         startService(i);
@@ -124,7 +123,7 @@ public class ConsumedFoodActivity extends ActionBarActivity
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing (for now)
+                        // Do nothing
                         dialog.dismiss();
                     }
                 });
