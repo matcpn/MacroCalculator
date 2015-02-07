@@ -73,7 +73,7 @@ public class AddItem extends ActionBarActivity {
 		double fatCount;
         int calorieCount;
 		
-		TextView nameValue = (TextView)findViewById(R.id.Name);
+		TextView nameValue = (TextView)findViewById(R.id.NameField);
 		name = nameValue.getText().toString();
 
 		try
