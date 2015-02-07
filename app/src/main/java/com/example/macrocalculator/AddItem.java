@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class AddItem extends ActionBarActivity {
@@ -17,7 +18,7 @@ public class AddItem extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_add_item); // set the content view to activity_add_item, not fragement_add_item
+		setContentView(R.layout.activity_add_item); // set the content view to activity_add_item, not fragment_add_item
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -28,7 +29,7 @@ public class AddItem extends ActionBarActivity {
 	}
 
     private void setupFoodSearchButton() {
-        Button SearchButton = (Button) findViewById(R.id.SearchButton);
+        ImageButton SearchButton = (ImageButton) findViewById(R.id.SearchButton);
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +51,7 @@ public class AddItem extends ActionBarActivity {
 		double fatCount;
         int calorieCount;
 		
-		TextView nameValue = (TextView)findViewById(R.id.Name);
+		TextView nameValue = (TextView)findViewById(R.id.NameField);
 		name = nameValue.getText().toString();
 
 		try

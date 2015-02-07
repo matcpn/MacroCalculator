@@ -3,65 +3,50 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context="com.example.macrocalculator.AddItem"
     tools:ignore="MergeRootFrame" >
 
-    <TextView
-        android:id="@+id/SearchLabel"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:textSize="25sp"
-        android:text="Search for food" />
+
 
     <EditText
         android:id="@+id/SearchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/SearchLabel"
-        android:ems="10" />
-    <Button
+        android:hint="@string/find_food"
+        style="@style/textInput" />
+
+    <ImageButton
         android:id="@+id/SearchButton"
+        android:src="@drawable/ic_search_grey600_48dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/SearchBar"
-        android:layout_centerHorizontal="true"
-        android:text="Search"
-        android:onClick="AddFoodItem"/>
+        android:layout_alignRight="@id/SearchBar"
+        android:layout_alignEnd="@id/SearchBar"
+        android:onClick="AddFoodItem"
+        android:background="@color/white" />
+
 
     <TextView
         android:id="@+id/FooterLabel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:gravity="center"
         android:textSize="25sp"
-        android:layout_below="@+id/SearchButton"
-        android:text="Or enter it manually" />
+        android:layout_below="@id/SearchBar"
+        android:textColor="@color/black"
+        android:text="@string/manual_entry"
+        android:paddingTop="72dp" />
 
-    <TextView
-        android:id="@+id/NameLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/FooterLabel"
-        android:text="Name" />
-    
     <EditText
-        android:id="@+id/Name"
-        android:layout_width="match_parent"
+        android:id="@+id/NameField"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/NameLabel"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/CaloriesValueLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Name"
-        android:text="Calories" />
+        android:layout_below="@id/FooterLabel"
+        android:ems="10"
+        android:hint="@string/food_name"
+        style="@style/textInput"
+        android:focusable="true" />
 
     <EditText
         android:id="@+id/CaloriesValue"
@@ -69,55 +54,43 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:layout_below="@+id/CaloriesValueLabel"/>
-
-    <TextView
-        android:id="@+id/ProteinValueLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CaloriesValue"
-        android:text="Protein Value" />
+        android:hint="@string/food_calories"
+        android:layout_below="@id/NameField"
+        style="@style/textInput"
+        android:focusable="true" />
 
     <EditText
         android:id="@+id/ProteinValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number" 
-        android:layout_below="@+id/ProteinValueLabel"/>
-    
-    <TextView
-        android:id="@+id/CarbValueLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/ProteinValue"
-        android:text="Carb Value" />
+        android:inputType="number"
+        android:hint="@string/food_protein"
+        android:layout_below="@id/CaloriesValue"
+        style="@style/textInput"
+        android:focusable="true" />
     
     <EditText
         android:id="@+id/CarbValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number" 
-        android:layout_below="@+id/CarbValueLabel"/>
-    
-    <TextView
-        android:id="@+id/FatValueLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CarbValue"
-        android:text="Fat Value" />
+        android:inputType="number"
+        android:hint="@string/food_carbs"
+        android:layout_below="@+id/ProteinValue"
+        style="@style/textInput"
+        android:focusable="true" />
+
     
     <EditText
         android:id="@+id/FatValue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="number" 
-        android:layout_below="@+id/FatValueLabel"/>
+        android:inputType="number"
+        android:hint="@string/food_fats"
+        android:layout_below="@+id/CarbValue"
+        style="@style/textInput"
+        android:focusable="true" />
 
     <Button
         android:id="@+id/button1"

@@ -12,4 +12,17 @@
     <string name="title_activity_add_item">AddItem</string>
     <string name="title_activity_are_you_sure">Are_you_sure</string>
 
+    <!--- Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!--- All the following are strings for the Form -->
+    <string name="find_food">Search For Food</string>
+    <string name="manual_entry">Or Enter Manually</string>
+    <string name="food_name">Name</string>
+    <string name="food_calories">Calories</string>
+    <string name="food_protein">Protein</string>
+    <string name="food_carbs">Carbs</string>
+    <string name="food_fats">Fat</string>
+
 </resources>
