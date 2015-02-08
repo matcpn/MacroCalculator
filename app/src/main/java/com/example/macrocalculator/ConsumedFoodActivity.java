@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment; // imported the wrong shit ... happens t
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,7 +144,12 @@ public class ConsumedFoodActivity extends ActionBarActivity
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) 
     {
@@ -151,6 +157,9 @@ public class ConsumedFoodActivity extends ActionBarActivity
         if (id == R.id.action_settings) 
         {
             return true;
+        }
+        if (id == R.id.user_preferences) {
+            startActivity(new Intent(this, UserPrefsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

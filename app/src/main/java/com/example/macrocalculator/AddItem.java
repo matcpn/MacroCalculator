@@ -126,7 +126,7 @@ public class AddItem extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.add_item, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -139,6 +139,9 @@ public class AddItem extends ActionBarActivity {
 		if (id == R.id.action_settings) {
 			return true;
 		}
+        if (id == R.id.user_preferences) {
+            startActivity(new Intent(this, UserPrefsActivity.class));
+        }
 		return super.onOptionsItemSelected(item);
 	}
 

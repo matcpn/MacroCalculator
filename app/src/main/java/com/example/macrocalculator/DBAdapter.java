@@ -31,6 +31,12 @@ public class DBAdapter {
 	public static final String KEY_CARB_COUNT = "carb_count";
 	public static final String KEY_FAT_COUNT = "fat_count";
     public static final String KEY_DATE_CONSUMED = "date_consumed";
+    public static final String KEY_HEIGHT = "height";
+    public static final String KEY_WEIGHT = "weight";
+    public static final String KEY_ISMALE = "is_male";
+    public static final String KEY_AGE = "age";
+    public static final String KEY_BMR = "bmr";
+    public static final String KEY_TDEE = "tdee";
 	
 	// TODO: Setup your field numbers here (0 = KEY_ROWID, 1=...)
 	public static final int COL_NAME = 1;
@@ -39,6 +45,12 @@ public class DBAdapter {
 	public static final int COL_CARB_COUNT = 4;
 	public static final int COL_FAT_COUNT = 5;
     public static final int COL_DATE_CONSUMED = 6;
+    public static final int COL_HEIGHT = 1;
+    public static final int COL_WEIGHT = 2;
+    public static final int COL_ISMALE = 3;
+    public static final int COL_AGE = 4;
+    public static final int COL_BMR = 5;
+    public static final int COL_TDEE = 6;
 	
 	public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_CALORIE_COUNT, KEY_PROTEIN_COUNT, KEY_CARB_COUNT, KEY_FAT_COUNT, KEY_DATE_CONSUMED};
 	
@@ -46,6 +58,7 @@ public class DBAdapter {
 	public static final String DATABASE_NAME = "a"; //FOR WHATEVER REASON THE DATABASE NAME NEEDED TO CHANGE
 	public static final String FOOD_MENU = "foodMenu";
 	public static final String CONSUMED_LIST = "consumedList";
+    public static final String USER_INFO = "userInfo";
 	
 	// Track DB version if a new version of your app changes the format.
 	public static final int DATABASE_VERSION = 3;
@@ -75,6 +88,18 @@ public class DBAdapter {
             + KEY_FAT_COUNT + " integer not null, "
             + KEY_DATE_CONSUMED + " text not null" // date time formatted as "YYYY-MM-DD"
 			+ ");";
+
+    private static final String SQL_CREATE_USER_INFO =
+            "create table " + USER_INFO
+            + " (" + KEY_ROWID + " integer primary key autoincrement, "
+            + KEY_HEIGHT + " integer not null, "
+            + KEY_WEIGHT + " integer not null, "
+            + KEY_ISMALE + " integer not null, " //BOOLEAN 1 or 0
+            + KEY_AGE + " integer not null, "
+            + KEY_BMR + " integer not null, "
+            + KEY_TDEE + " integer not null"
+            + ");";
+
 	
 	private final Context context;
 	
@@ -198,13 +223,6 @@ public class DBAdapter {
         return foodList;
     }
 	
-	
-	
-	
-	
-	
-	
-	
 	public boolean deleteRow(String DATABASE_TABLE_NAME, long rowId) {
 		String where = KEY_ROWID + "=" + rowId;
 		return db.delete(DATABASE_TABLE_NAME, where, null) != 0;
@@ -260,6 +278,7 @@ public class DBAdapter {
 		public void onCreate(SQLiteDatabase _db) {
 			_db.execSQL(SQL_CREATE_FOOD_MENU);	
 			_db.execSQL(SQL_CREATE_CONSUMED_LIST);
+            _db.execSQL(SQL_CREATE_USER_INFO);
 		}
 
 		@Override
@@ -270,6 +289,7 @@ public class DBAdapter {
 			// Destroy old database:
 			_db.execSQL("DROP TABLE IF EXISTS " + FOOD_MENU);
 			_db.execSQL("DROP TABLE IF EXISTS " + CONSUMED_LIST);
+            _db.execSQL("DROP TABLE IF EXISTS " + USER_INFO);
 			
 			// Recreate new database:
 			onCreate(_db);

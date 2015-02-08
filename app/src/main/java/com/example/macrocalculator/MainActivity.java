@@ -142,7 +142,7 @@ public class MainActivity extends ActionBarActivity {
                         int indexOfFoodToConsume = foodMenu.getFoodList().indexOf(new Food(textView.getText().toString()));
                         Food foodToConsume = foodMenu.getFoodList().get(indexOfFoodToConsume);
                         myDb.open();
-                        myDb.addRowToConsumedList(ConsumedListDBHandler.CONSUMED_LIST,
+                        myDb.addRowToConsumedList(DBAdapter.CONSUMED_LIST,
                                 foodToConsume.getName(),
                                 foodToConsume.getCalorieCount(),
                                 foodToConsume.getProteinCount(),
@@ -195,6 +195,9 @@ public class MainActivity extends ActionBarActivity {
 		if (id == R.id.action_settings) {
 			return true;
 		}
+        if (id == R.id.user_preferences) {
+            startActivity(new Intent(this, UserPrefsActivity.class));
+        }
 		return super.onOptionsItemSelected(item);
 	}
 
