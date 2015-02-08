@@ -2,13 +2,10 @@ package com.example.macrocalculator.RequestResponseListener;
 
 import android.util.Log;
 
-import com.example.macrocalculator.FoodDatabase;
 import com.example.macrocalculator.JSONParser;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 /**
  * Created by Brendan on 2/6/15.
@@ -21,7 +18,7 @@ public class SearchRequestListener implements RequestResponseListener {
         JSONArray items = parser.getSearchResultsItems();
         for(int i = 0; i < items.length(); i++) {
             try {
-                Log.d("item", items.getJSONObject(i).getInt("ndbno") + "");
+                Log.d("item", items.getJSONObject(i).getString("name"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
