@@ -17,11 +17,30 @@
         android:text="User Stats"
         android:paddingTop="72dp" />
 
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/UserLabel"
+        android:orientation="horizontal"
+        android:id="@+id/weightLossRadioButtons">
+        <RadioButton android:id="@+id/RadioGainWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gain Weight"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/RadioLoseWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lose Weight"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+
     <EditText
         android:id="@+id/HeightFeetField"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/UserLabel"
+        android:layout_below="@id/weightLossRadioButtons"
         android:gravity="center"
         android:inputType="number"
         android:ems="10"
@@ -38,7 +57,7 @@
         android:inputType="number"
         android:hint="inches"
         android:layout_toRightOf="@id/HeightFeetField"
-        android:layout_below="@+id/UserLabel"
+        android:layout_below="@+id/weightLossRadioButtons"
         style="@style/textInput"
         android:focusable="true" />
 
@@ -68,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/Age"
         android:orientation="horizontal"
-        android:id="@+id/radioButtons">
+        android:id="@+id/genderRadioButtons">
         <RadioButton android:id="@+id/RadioMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,7 +104,7 @@
         android:id="@+id/spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/radioButtons"/>
+        android:layout_below="@+id/genderRadioButtons"/>
 
     <Button
         android:id="@+id/SaveButton"

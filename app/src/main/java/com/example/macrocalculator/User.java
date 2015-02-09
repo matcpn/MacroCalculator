@@ -10,10 +10,12 @@ public class User {
     Height m_height;
     Weight m_weight;
     boolean m_isMale;
+    boolean m_isGaining;
     int m_age;
     int m_s;
     float m_bmr;
     float m_TDEE;
+    float m_caloriesToEat;
 
     public User(Height h, Weight w, boolean isMale, int age, ActivityMultiplier a) {
         m_height = h;
@@ -23,6 +25,11 @@ public class User {
         m_s = isMale ? 5 : -161;
         m_bmr = calcBMR(h, w, m_s, age);
         m_TDEE = calcTDEE(m_bmr, a);
+        m_caloriesToEat = calcCaloriesToEat(m_TDEE);
+    }
+
+    private float calcCaloriesToEat(float TDEE) {
+        return (m_isGaining? TDEE * 1.2f : TDEE * .8f);
     }
 
     private float calcTDEE(float bmr, ActivityMultiplier a) {
