@@ -17,15 +17,20 @@ public class User {
     float m_TDEE;
     float m_caloriesToEat;
 
-    public User(Height h, Weight w, boolean isMale, int age, ActivityMultiplier a) {
+    public User(Height h, Weight w, boolean isMale, boolean isGaining, int age, ActivityMultiplier a) {
         m_height = h;
         m_weight = w;
         m_isMale = isMale;
         m_age = age;
+        m_isGaining = isGaining;
         m_s = isMale ? 5 : -161;
         m_bmr = calcBMR(h, w, m_s, age);
         m_TDEE = calcTDEE(m_bmr, a);
         m_caloriesToEat = calcCaloriesToEat(m_TDEE);
+    }
+
+    public User() {
+
     }
 
     private float calcCaloriesToEat(float TDEE) {
@@ -78,5 +83,9 @@ public class User {
     private float calcBMR(Height h, Weight w, int s, int age) {
         float bmr = ((10f * w.getWeight()) + (6.25f * h.getHeight()) - (5 * age)) + s;
         return bmr;
+    }
+
+    public float getCaloriesToEat() {
+        return m_caloriesToEat;
     }
 }

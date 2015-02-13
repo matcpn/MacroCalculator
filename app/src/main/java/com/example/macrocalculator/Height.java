@@ -9,8 +9,8 @@ public class Height {
 
     Height(int feet, int inches) {
         float height;
-        height = feet * 0.3048f;
-        height = height + inches * 0.0254f;
+        height = feet * 30.48f;
+        height = height + (inches * 2.54f);
         m_meters = height;
     }
 

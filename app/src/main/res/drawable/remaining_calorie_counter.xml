@@ -30,5 +30,5 @@
     <item android:minLevel="250" android:maxLevel="349" android:drawable="@drawable/remaining300" />
     <item android:minLevel="150" android:maxLevel="249" android:drawable="@drawable/remaining200" />
     <item android:minLevel="50" android:maxLevel="149" android:drawable="@drawable/remaining100" />
-    <item android:minLevel="0" android:maxLevel="49" android:drawable="@drawable/remaining0" />
+    <item android:maxLevel="49" android:drawable="@drawable/remaining0" />
 </level-list>

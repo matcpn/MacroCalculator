@@ -1,5 +1,6 @@
 package com.example.macrocalculator;
 
+import android.app.Application;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -25,9 +26,17 @@ public class StatusBarNotification extends Service {
         myDb.open();
         FoodList list = myDb.loadConsumedList();
 
-        int totalCaloriesNeeded = 3000;
-        int remainingCalories = totalCaloriesNeeded - (int)list.getCalorieCount();
+        float totalCaloriesNeeded;
+        try {
+            totalCaloriesNeeded = ((MyApplication) this.getApplication()).getUser().getCaloriesToEat();
+        }
+        catch (NullPointerException e) {
+            totalCaloriesNeeded = 3000f;
+        }
+
+        float remainingCalories = totalCaloriesNeeded - (int)list.getCalorieCount();
         Log.d("cals", String.valueOf(remainingCalories));
+        Log.d("total cals", String.valueOf(totalCaloriesNeeded));
 
         //comments have to do with making the notification show the right image in the notification bar
         //I probably shouldn't commit it like this but I'm going to anyways
@@ -39,7 +48,7 @@ public class StatusBarNotification extends Service {
         PendingIntent contentIntent = PendingIntent.getActivity(this,requestID, i, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.remaining_calorie_counter, remainingCalories)
+                .setSmallIcon(R.drawable.remaining_calorie_counter, (int)remainingCalories)
  //               .setLargeIcon(largeIcon)
                 .setContentIntent(contentIntent)
                 .setContentTitle("Remaining Calories")
